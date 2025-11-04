@@ -11,6 +11,7 @@ dragos-platform-release-notes:
     - Platform_3.0.1
     - Platform_3.0.2
     - Platform_3.0.3
+    - Platform_3.0.4
 dragos-platform-release-notes-export:
   project: release-notes
   title: Dragos Platform Release Notes
@@ -23,6 +24,7 @@ dragos-platform-release-notes-export:
     - Platform_3.0.1
     - Platform_3.0.2
     - Platform_3.0.3
+    - Platform_3.0.4
 dragos-platform-administrator-guide:
   project: admin-guide
   title: Administrator Guide
