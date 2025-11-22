@@ -81,8 +81,8 @@ release-notes:
       - Platform_3.0.2
       - Platform_3.0.3
       - Platform_3.0.4
-      - Platform_3.0.5
-  #     - Platform_3.1
+      # - Platform_3.0.5
+      # - Platform_3.1
 
 #
 # Knowledge Base - Online only
@@ -103,14 +103,14 @@ knowledge-base:
 #
 community-defense-program:
   dragos-community-defense-program:
-  title: Community Defense Program
-  update: Partial
-  visibility: Restricted
-  export: False
-  output_tags:
-    - OnlineDoc
-    - Platform_3.0
-    # - Platform_3.1
+    title: Community Defense Program
+    update: Partial
+    visibility: Restricted
+    export: False
+    output_tags:
+      - OnlineDoc
+      - Platform_3.0
+      # - Platform_3.1
 
 #
 # Deployment Guide
