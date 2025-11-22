@@ -1,37 +1,76 @@
-name: run clickhelper scheduled tasks
+name: ClickHelper Workflows
 
 on:
-  workflow_dispatch:
+  # Run on schedule (daily at 4 AM UTC)
   schedule:
-    - cron: '0 3 * * *' # At 03:00 every day
+    - cron: '0 4 * * *'
+
+  # Allow manual trigger with workflow selection
+  workflow_dispatch:
+    inputs:
+      workflow:
+        description: 'Workflow to run'
+        required: true
+        default: 'all'
+        type: choice
+        options:
+          - all
+          - publish
+          - tribble-upload
+          - backup
+      config_file:
+        description: 'Config file to use'
+        required: false
+        default: 'config.yaml'
 
 jobs:
-  build:
+  clickhelper:
     runs-on: ubuntu-latest
+
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: checkout repo content
-        uses: actions/checkout@v5 # checkout the repository content to github runner
-
-      - name: setup python
+      - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.13' # install the python version needed
-          
-      - name: install python packages
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          
-      - name: update publications # run publisher.py
-        env:
-          CLICKHELP_USER: ${{ secrets.CLICKHELP_USER }}
-          CLICKHELP_KEY: ${{ secrets.CLICKHELP_KEY }}
-        run: python publisher.py
 
-      - name: export publications # run publisher.py
+      - name: Run ClickHelper workflow
         env:
-          CLICKHELP_USER: ${{ secrets.CLICKHELP_USER }}
-          CLICKHELP_KEY: ${{ secrets.CLICKHELP_KEY }}
-        run: python exporter.py
-        
+          # ClickHelp Configuration
+          CLICKHELP_PORTAL_URL: ${{ secrets.CLICKHELP_PORTAL_URL }}
+          CLICKHELP_USERNAME: ${{ secrets.CLICKHELP_USERNAME }}
+          CLICKHELP_API_KEY: ${{ secrets.CLICKHELP_API_KEY }}
+
+          # Tribble Configuration
+          TRIBBLE_API_TOKEN: ${{ secrets.TRIBBLE_API_TOKEN }}
+          TRIBBLE_USER_EMAIL: ${{ secrets.TRIBBLE_USER_EMAIL }}
+          TRIBBLE_BASE_URL: ${{ secrets.TRIBBLE_BASE_URL || 'https://my.tribble.ai' }}
+
+          # AWS S3 Configuration
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_S3_BUCKET_NAME: ${{ secrets.AWS_S3_BUCKET_NAME }}
+          AWS_REGION: ${{ secrets.AWS_REGION || 'us-east-1' }}
+
+          # Optional Configuration
+          WAIT_FOR_PROCESSING: 'true'
+          CONFIG_FILE: ${{ github.event.inputs.config_file || 'config.yaml' }}
+        run: |
+          WORKFLOW="${{ github.event.inputs.workflow || 'all' }}"
+          python clickhelper.py $WORKFLOW --config $CONFIG_FILE
+
+      - name: Upload logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: clickhelper-logs-${{ github.run_number }}
+          path: clickhelper.log
+          retention-days: 30

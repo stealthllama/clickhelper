@@ -1,0 +1,464 @@
+# ClickHelp Publications Configuration - Project-Based Format
+# This file demonstrates the project-based YAML format
+#
+# Each top-level key (e.g., 'release-notes', 'deployment-guide') represents a ClickHelp PROJECT.
+# Under each project, you define the PUBLICATIONS that belong to that project.
+# Publications can be published, exported to PDF, and uploaded to Tribble.
+
+# Global ClickHelp Configuration
+clickhelp:
+  portal_url: "https://docs.dragos.com"
+  # Credentials will be loaded from environment variables:
+  # CLICKHELP_USERNAME and CLICKHELP_API_KEY
+
+# Global Tribble Configuration
+tribble:
+  base_url: "https://my.tribble.ai"
+  # Credentials will be loaded from environment variables:
+  # TRIBBLE_API_TOKEN and TRIBBLE_USER_EMAIL
+
+# S3 Backup Configuration
+s3_backup:
+  enabled: true
+  retention_count: 30 # Keep the last X backups per project
+  # AWS credentials will be loaded from environment variables:
+  # AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_S3_BUCKET_NAME, AWS_REGION
+
+# Global settings
+settings:
+  download_dir: "./downloads"
+  backup_dir: "./backups"
+  wait_for_export: true
+  wait_for_processing: true
+  max_export_wait: 600  # seconds
+  max_processing_wait: 600  # seconds
+  poll_interval: 15  # seconds
+
+################################################################################
+#
+# Projects & Publications
+#
+# Instructions: 
+#
+#   Patch Releases
+#   - Create a new output tag for the patch release.
+#   - Add the patch release output tag to only the release-notes publications.
+#
+#   Major/Minor Releases
+#   - Create a new output tag for the major/minor release.
+#   - Create a new versioned publication definition within each project.
+#   - And add the major/minor release output tag to each new publications.
+#
+################################################################################
+
+#
+# Release Notes -  Major/minor and patch version output tags are supported here
+#
+release-notes:
+  dragos-platform-release-notes:
+    title: Release Notes
+    update: Partial
+    visibility: Restricted
+    export: False
+    output_tags:
+      - OnlineDoc
+      - Platform_3.0
+      - Platform_3.0.1
+      - Platform_3.0.2
+      - Platform_3.0.3
+      - Platform_3.0.4
+      # - Platform_3.0.5
+      # - Platform_3.1
+  export-dragos-platform-release-notes:
+    title: Dragos Platform Release Notes
+    update: Partial
+    visibility: Private
+    export: True
+    output_tags:
+      - PrintedDoc
+      - Platform_3.0
+      - Platform_3.0.1
+      - Platform_3.0.2
+      - Platform_3.0.3
+      - Platform_3.0.4
+      - Platform_3.0.5
+  #     - Platform_3.1
+
+#
+# Knowledge Base - Online only
+#
+knowledge-base:
+  dragos-platform-knowledge-base:
+    title: Knowledge Base
+    update: Partial
+    visibility: Restricted
+    export: False
+    output_tags:
+      - OnlineDoc
+      - Platform_3.0
+      # - Platform_3.1
+
+#
+# Community Defense Program - Online only
+#
+community-defense-program:
+  dragos-community-defense-program:
+  title: Community Defense Program
+  update: Partial
+  visibility: Restricted
+  export: False
+  output_tags:
+    - OnlineDoc
+    - Platform_3.0
+    # - Platform_3.1
+
+#
+# Deployment Guide
+#
+deployment-guide:
+  dragos-platform-deployment-guide:
+    title: Deployment Guide
+    update: Partial
+    visibility: Restricted
+    export: False
+    output_tags:
+      - OnlineDoc
+      - Platform_3.0
+  dragos-platform-deployment-guide-export:
+    title: Dragos Platform Deployment Guide
+    update: Partial
+    visibility: Private
+    export: True
+    output_tags:
+      - PrintedDoc
+      - Platform_3.0
+  # deployment-guide-3-0:
+  #   title: Deployment Guide 3.0
+  #   update: Partial
+  #   visibility: Restricted
+  #   export: False
+  #   output_tags:
+  #     - OnlineDoc
+  #     - Platform_3.0
+  # export-deployment-guide-3-0:
+  #   title: Dragos Platform 3.0 Deployment Guide
+  #   update: Partial
+  #   visibility: Private
+  #   export: True
+  #   output_tags:
+  #     - PrintedDoc
+  #     - Platform_3.0
+  # deployment-guide-3-1:
+  #   title: Deployment Guide 3.1
+  #   update: Partial
+  #   visibility: Restricted
+  #   export: False
+  #   output_tags:
+  #     - OnlineDoc
+  #     - Platform_3.0
+  #     - Platform_3.1
+  # export-deployment-guide-3-1:
+  #   title: Dragos Platform 3.1 Deployment Guide
+  #   update: Partial
+  #   visibility: Private
+  #   export: True
+  #   output_tags:
+  #     - PrintedDoc
+  #     - Platform_3.0
+  #     - Platform_3.1
+
+#
+# Administrator Guide
+#
+admin-guide:
+  dragos-platform-administrator-guide:
+    title: Administrator Guide
+    update: Partial
+    visibility: Restricted
+    export: False
+    output_tags:
+      - OnlineDoc
+      - Platform_3.0
+  dragos-platform-administrator-guide-export:
+    title: Dragos Platform Administrator Guide
+    update: Partial
+    visibility: Private
+    export: True
+    output_tags:
+      - PrintedDoc
+      - Platform_3.0
+  # administrator-guide-3-0:
+  #   title: Administrator Guide 3.0
+  #   update: Partial
+  #   visibility: Restricted
+  #   export: False
+  #   output_tags:
+  #     - OnlineDoc
+  #     - Platform_3.0
+  # export-administrator-guide-3-0:
+  #   title: Dragos Platform 3.0 Administrator Guide
+  #   update: Partial
+  #   visibility: Private
+  #   export: True
+  #   output_tags:
+  #     - PrintedDoc
+  #     - Platform_3.0
+  # administrator-guide-3-1:
+  #   title: Administrator Guide 3.1
+  #   update: Partial
+  #   visibility: Restricted
+  #   export: False
+  #   output_tags:
+  #     - OnlineDoc
+  #     - Platform_3.0
+  #     - Platform_3.1
+  # export-administrator-guide-3-1:
+  #   title: Dragos Platform 3.1 Administrator Guide
+  #   update: Partial
+  #   visibility: Private
+  #   export: True
+  #   output_tags:
+  #     - PrintedDoc
+  #     - Platform_3.0
+  #     - Platform_3.1
+
+#
+# User Guide
+#
+user-guide:
+  dragos-platform-user-guide:
+    title: User Guide
+    update: Partial
+    visibility: Restricted
+    export: False
+    output_tags:
+      - OnlineDoc
+      - Platform_3.0
+  dragos-platform-user-guide-export:
+    title: Dragos Platform User Guide
+    update: Partial
+    visibility: Private
+    export: True
+    output_tags:
+      - PrintedDoc
+      - Platform_3.0
+  # user-guide-3-0:
+  #   title: User Guide 3.0
+  #   update: Partial
+  #   visibility: Restricted
+  #   export: False
+  #   output_tags:
+  #     - OnlineDoc
+  #     - Platform_3.0
+  # export-user-guide-3-0:
+  #   title: Dragos Platform 3.0 User Guide
+  #   update: Partial
+  #   visibility: Private
+  #   export: True
+  #   output_tags:
+  #     - PrintedDoc
+  #     - Platform_3.0
+  # user-guide-3-1:
+  #   title: User Guide 3.1
+  #   update: Partial
+  #   visibility: Restricted
+  #   export: False
+  #   output_tags:
+  #     - OnlineDoc
+  #     - Platform_3.0
+  #     - Platform_3.1
+  # export-user-guide-3-1:
+  #   title: Dragos Platform 3.1 User Guide
+  #   update: Partial
+  #   visibility: Private
+  #   export: True
+  #   output_tags:
+  #     - PrintedDoc
+  #     - Platform_3.0
+  #     - Platform_3.1
+
+#
+# Developer Guide
+#
+developer-guide:
+  dragos-platform-developer-guide:
+    title: Developer Guide
+    update: Partial
+    visibility: Restricted
+    export: False
+    output_tags:
+      - OnlineDoc
+      - Platform_3.0
+  dragos-platform-developer-guide-export:
+    title: Dragos Platform Developer Guide
+    update: Partial
+    visibility: Private
+    export: True
+    output_tags:
+      - PrintedDoc
+      - Platform_3.0
+  # developer-guide-3-0:
+  #   title: Developer Guide 3.0
+  #   update: Partial
+  #   visibility: Restricted
+  #   export: False
+  #   output_tags:
+  #     - OnlineDoc
+  #     - Platform_3.0
+  # export-developer-guide-3-0:
+  #   title: Dragos Platform 3.0 Developer Guide
+  #   update: Partial
+  #   visibility: Private
+  #   export: True
+  #   output_tags:
+  #     - PrintedDoc
+  #     - Platform_3.0
+  # developer-guide-3-1:
+  #   title: Developer Guide 3.1
+  #   update: Partial
+  #   visibility: Restricted
+  #   export: False
+  #   output_tags:
+  #     - OnlineDoc
+  #     - Platform_3.0
+  #     - Platform_3.1
+  # export-developer-guide-3-1:
+  #   title: Dragos Platform 3.1 Developer Guide
+  #   update: Partial
+  #   visibility: Private
+  #   export: True
+  #   output_tags:
+  #     - PrintedDoc
+  #     - Platform_3.0
+  #     - Platform_3.1
+
+#
+# Integration Guide
+#
+integration-guide:
+  dragos-platform-integration-guide:
+    title: Integration Guide
+    update: Partial
+    visibility: Restricted
+    export: False
+    output_tags:
+      - OnlineDoc
+      - Platform_3.0
+  dragos-platform-integration-guide-export:
+    title: Dragos Platform Integration Guide
+    update: Partial
+    visibility: Private
+    export: True
+    output_tags:
+      - PrintedDoc
+      - Platform_3.0
+  # integration-guide-3-0:
+  #   title: Integration Guide 3.0
+  #   update: Partial
+  #   visibility: Restricted
+  #   export: False
+  #   output_tags:
+  #     - OnlineDoc
+  #     - Platform_3.0
+  # export-integration-guide-3-0:
+  #   title: Dragos Platform 3.0 Integration Guide
+  #   update: Partial
+  #   visibility: Private
+  #   export: True
+  #   output_tags:
+  #     - PrintedDoc
+  #     - Platform_3.0
+  # integration-guide-3-1:
+  #   title: Integration Guide 3.1
+  #   update: Partial
+  #   visibility: Restricted
+  #   export: False
+  #   output_tags:
+  #     - OnlineDoc
+  #     - Platform_3.0
+  #     - Platform_3.1
+  # export-integration-guide-3-1:
+  #   title: Dragos Platform 3.1 Integration Guide
+  #   update: Partial
+  #   visibility: Private
+  #   export: True
+  #   output_tags:
+  #     - PrintedDoc
+  #     - Platform_3.0
+  #     - Platform_3.1
+
+#
+# Support Guide
+#
+support-guide:
+  dragos-platform-support-guide:
+    title: Support Guide
+    update: Partial
+    visibility: Restricted
+    export: False
+    output_tags:
+      - OnlineDoc
+      - Platform_3.0
+  dragos-platform-support-guide-export:
+    title: Dragos Platform Support Guide
+    update: Partial
+    visibility: Private
+    export: True
+    output_tags:
+      - PrintedDoc
+      - Platform_3.0
+  # support-guide-3-0:
+  #   title: Support Guide 3.0
+  #   update: Partial
+  #   visibility: Restricted
+  #   export: False
+  #   output_tags:
+  #     - OnlineDoc
+  #     - Platform_3.0
+  # export-support-guide-3-0:
+  #   title: Dragos Platform 3.0 Support Guide
+  #   update: Partial
+  #   visibility: Private
+  #   export: True
+  #   output_tags:
+  #     - PrintedDoc
+  #     - Platform_3.0
+  # support-guide-3-1:
+  #   title: Support Guide 3.1
+  #   update: Partial
+  #   visibility: Restricted
+  #   export: False
+  #   output_tags:
+  #     - OnlineDoc
+  #     - Platform_3.0
+  #     - Platform_3.1
+  # export-support-guide-3-1:
+  #   title: Dragos Platform 3.1 Support Guide
+  #   update: Partial
+  #   visibility: Private
+  #   export: True
+  #   output_tags:
+  #     - PrintedDoc
+  #     - Platform_3.0
+  #     - Platform_3.1
+
+#
+# NERC CIP Compliance Guide
+#
+# project-nerc-cip-compliance-guide:
+#   nerc-cip-compliance-guide:
+#     title: NERC CIP Compliance Guide
+#     update: Partial
+#     visibility: Restricted
+#     export: False
+#     output_tags:
+#       - OnlineDoc
+#       - Platform_3.0
+#   dexport-nerc-cip-compliance-guide:
+#     title: Dragos Platform NERC CIP Compliance Guide
+#     update: Partial
+#     visibility: Private
+#     export: True
+#     output_tags:
+#       - PrintedDoc
+#       - Platform_3.0
