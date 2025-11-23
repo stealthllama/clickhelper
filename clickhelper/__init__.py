@@ -530,12 +530,15 @@ class ClickHelpProject:
         self.publications.append(publication)
         return publication
 
-    def backup_project(self, download_dir: str = "./downloads") -> str:
+    def backup_project(self, download_dir: str = "./downloads",
+                      max_wait: int = 600, poll_interval: int = 10) -> str:
         """
         Create and download a backup of this project.
 
         Args:
             download_dir: Directory to save the backup file
+            max_wait: Maximum time to wait in seconds (default: 10 minutes)
+            poll_interval: Time between status checks in seconds (default: 10)
 
         Returns:
             Path to the downloaded backup file
@@ -553,7 +556,7 @@ class ClickHelpProject:
         if not task_key:
             raise Exception("No task key returned from backup")
 
-        task_status = self.exporter.wait_for_task(task_key, "backup")
+        task_status = self.exporter.wait_for_task(task_key, "backup", max_wait, poll_interval)
 
         # Get the backup file path from ClickHelp storage
         output_filename = task_info.get('outputFileName')
@@ -605,7 +608,8 @@ class ClickHelpPublication:
 
     def publish(self, update_mode: str = "Partial",
                visibility: str = "Restricted",
-               output_tags: Optional[List[str]] = None) -> Dict[str, Any]:
+               output_tags: Optional[List[str]] = None,
+               max_wait: int = 600, poll_interval: int = 10) -> Dict[str, Any]:
         """
         Publish this publication.
 
@@ -613,6 +617,8 @@ class ClickHelpPublication:
             update_mode: "FullReplace" or "Partial" update
             visibility: "Public", "Restricted", or "Private"
             output_tags: List of output tags to apply
+            max_wait: Maximum time to wait in seconds (default: 10 minutes)
+            poll_interval: Time between status checks in seconds (default: 10)
 
         Returns:
             Publish task result
@@ -630,18 +636,21 @@ class ClickHelpPublication:
         # Wait for publish to complete
         task_key = task_info.get('taskKey')
         if task_key:
-            task_status = self.project.exporter.wait_for_task(task_key, "publish")
+            task_status = self.project.exporter.wait_for_task(task_key, "publish", max_wait, poll_interval)
             logger.info(f"Publication '{self.title}' updated successfully")
             return task_status
 
         return task_info
 
-    def export_to_pdf(self, export_preset_name: str = "Default") -> Dict[str, Any]:
+    def export_to_pdf(self, export_preset_name: str = "Default",
+                     max_wait: int = 600, poll_interval: int = 10) -> Dict[str, Any]:
         """
         Export this publication to PDF (without downloading).
 
         Args:
             export_preset_name: Export preset name (default: "Default")
+            max_wait: Maximum time to wait in seconds (default: 10 minutes)
+            poll_interval: Time between status checks in seconds (default: 10)
 
         Returns:
             Task status information
@@ -661,7 +670,7 @@ class ClickHelpPublication:
         if not task_key:
             raise Exception("No task key returned from export")
 
-        task_status = self.project.exporter.wait_for_export(task_key)
+        task_status = self.project.exporter.wait_for_export(task_key, max_wait, poll_interval)
         logger.info(f"PDF export completed for: {self.title}")
         return task_status
 
@@ -789,7 +798,8 @@ class ClickHelpPublication:
 
     def execute_actions(self, tribble_uploader: Optional['TribbleUploader'] = None,
                        download_dir: str = "./downloads",
-                       wait_for_processing: bool = True) -> Dict[str, Any]:
+                       wait_for_processing: bool = True,
+                       max_wait: int = 600, poll_interval: int = 10) -> Dict[str, Any]:
         """
         Execute all configured actions for this publication.
 
@@ -797,6 +807,8 @@ class ClickHelpPublication:
             tribble_uploader: TribbleUploader instance (required if upload_tribble action is configured)
             download_dir: Directory to save exported PDFs
             wait_for_processing: Whether to wait for Tribble processing
+            max_wait: Maximum time to wait in seconds (default: 10 minutes)
+            poll_interval: Time between status checks in seconds (default: 10)
 
         Returns:
             Dictionary with results of all actions
@@ -817,7 +829,9 @@ class ClickHelpPublication:
                     task_info = self.publish(
                         update_mode=action_config.get('update_mode', 'Partial'),
                         visibility=action_config.get('visibility', 'Restricted'),
-                        output_tags=action_config.get('output_tags')
+                        output_tags=action_config.get('output_tags'),
+                        max_wait=max_wait,
+                        poll_interval=poll_interval
                     )
                     action_result['success'] = True
                     action_result['task_key'] = task_info.get('taskKey')
@@ -825,7 +839,9 @@ class ClickHelpPublication:
                 elif action_type == 'export_pdf':
                     logger.info(f"Action: Export PDF {self.title}")
                     task_status = self.export_to_pdf(
-                        export_preset_name=action_config.get('export_preset_name', 'Default')
+                        export_preset_name=action_config.get('export_preset_name', 'Default'),
+                        max_wait=max_wait,
+                        poll_interval=poll_interval
                     )
                     action_result['success'] = True
                     action_result['task_status'] = task_status
@@ -886,13 +902,15 @@ class TribbleUploader:
         self.upload_endpoint = f"{self.base_url}/api/external/upload"
         self.status_endpoint = f"{self.base_url}/api/external/upload/status"
 
-    def upload_pdf(self, file_path: str, label: str) -> Dict[str, Any]:
+    def upload_pdf(self, file_path: str, label: str, max_retries: int = 5, retry_delay: int = 20) -> Dict[str, Any]:
         """
         Upload a PDF file to Tribble for document ingestion.
 
         Args:
             file_path: Local path to the PDF file to upload
             label: Label/name for the document in Tribble
+            max_retries: Maximum number of retries for 403/502 errors (default: 5)
+            retry_delay: Delay in seconds between retries (default: 20)
 
         Returns:
             Upload response including job_id for status tracking
@@ -904,11 +922,6 @@ class TribbleUploader:
             "Authorization": f"Bearer {self.api_token}"
         }
 
-        # Prepare multipart form data
-        files = {
-            'file': (os.path.basename(file_path), open(file_path, 'rb'), 'application/pdf')
-        }
-
         data = {
             'metadata': json.dumps({"label": label}),
             'user': self.user_email
@@ -916,40 +929,65 @@ class TribbleUploader:
 
         logger.info(f"Uploading PDF to Tribble: {file_path} (label: {label})")
 
-        try:
-            response = requests.post(
-                self.upload_endpoint,
-                headers=headers,
-                files=files,
-                data=data
-            )
-            response.raise_for_status()
+        for attempt in range(max_retries):
+            file_handle = None
+            try:
+                # Open file for this attempt
+                file_handle = open(file_path, 'rb')
+                files = {
+                    'file': (os.path.basename(file_path), file_handle, 'application/pdf')
+                }
 
-            result = response.json()
+                response = requests.post(
+                    self.upload_endpoint,
+                    headers=headers,
+                    files=files,
+                    data=data
+                )
+                response.raise_for_status()
 
-            if result.get('success'):
-                job_id = result.get('response', {}).get('job_id')
-                logger.info(f"PDF uploaded successfully. Job ID: {job_id}")
-                return result
-            else:
-                error_msg = result.get('error', 'Unknown error')
-                logger.error(f"Upload failed: {error_msg}")
-                raise Exception(f"Tribble upload failed: {error_msg}")
+                result = response.json()
 
-        except requests.exceptions.RequestException as e:
-            logger.error(f"Failed to upload PDF to Tribble: {e}")
-            raise
-        finally:
-            # Close file handle
-            if 'file' in files:
-                files['file'][1].close()
+                if result.get('success'):
+                    job_id = result.get('response', {}).get('job_id')
+                    logger.info(f"PDF uploaded successfully. Job ID: {job_id}")
+                    return result
+                else:
+                    error_msg = result.get('error', 'Unknown error')
+                    logger.error(f"Upload failed: {error_msg}")
+                    raise Exception(f"Tribble upload failed: {error_msg}")
 
-    def check_status(self, job_id: str) -> Dict[str, Any]:
+            except requests.exceptions.HTTPError as e:
+                if e.response.status_code in (403, 502):
+                    if attempt < max_retries - 1:
+                        logger.warning(f"Tribble API returned {e.response.status_code}. Retrying in {retry_delay} seconds... (Attempt {attempt + 1}/{max_retries})")
+                        time.sleep(retry_delay)
+                        continue
+                    else:
+                        logger.error(f"Tribble API failed after {max_retries} attempts with {e.response.status_code}")
+                        raise
+                else:
+                    logger.error(f"Failed to upload PDF to Tribble: {e}")
+                    raise
+            except requests.exceptions.RequestException as e:
+                logger.error(f"Failed to upload PDF to Tribble: {e}")
+                raise
+            finally:
+                # Close file handle
+                if file_handle:
+                    file_handle.close()
+
+        # Should not reach here, but just in case
+        raise Exception(f"Failed to upload PDF after {max_retries} attempts")
+
+    def check_status(self, job_id: str, max_retries: int = 5, retry_delay: int = 20) -> Dict[str, Any]:
         """
         Check the status of a document ingest job.
 
         Args:
             job_id: Job ID returned from upload_pdf
+            max_retries: Maximum number of retries for 403/502 errors (default: 5)
+            retry_delay: Delay in seconds between retries (default: 20)
 
         Returns:
             Status response with current processing state
@@ -964,28 +1002,44 @@ class TribbleUploader:
 
         logger.info(f"Checking status for job: {job_id}")
 
-        try:
-            response = requests.get(
-                self.status_endpoint,
-                headers=headers,
-                params=params
-            )
-            response.raise_for_status()
+        for attempt in range(max_retries):
+            try:
+                response = requests.get(
+                    self.status_endpoint,
+                    headers=headers,
+                    params=params
+                )
+                response.raise_for_status()
 
-            result = response.json()
+                result = response.json()
 
-            if result.get('success'):
-                status = result.get('response', {}).get('status')
-                logger.info(f"Job {job_id} status: {status}")
-                return result
-            else:
-                error_msg = result.get('error', 'Unknown error')
-                logger.error(f"Status check failed: {error_msg}")
-                raise Exception(f"Status check failed: {error_msg}")
+                if result.get('success'):
+                    status = result.get('response', {}).get('status')
+                    logger.info(f"Job {job_id} status: {status}")
+                    return result
+                else:
+                    error_msg = result.get('error', 'Unknown error')
+                    logger.error(f"Status check failed: {error_msg}")
+                    raise Exception(f"Status check failed: {error_msg}")
 
-        except requests.exceptions.RequestException as e:
-            logger.error(f"Failed to check job status: {e}")
-            raise
+            except requests.exceptions.HTTPError as e:
+                if e.response.status_code in (403, 502):
+                    if attempt < max_retries - 1:
+                        logger.warning(f"Tribble API returned {e.response.status_code}. Retrying in {retry_delay} seconds... (Attempt {attempt + 1}/{max_retries})")
+                        time.sleep(retry_delay)
+                        continue
+                    else:
+                        logger.error(f"Tribble API failed after {max_retries} attempts with {e.response.status_code}")
+                        raise
+                else:
+                    logger.error(f"Failed to check job status: {e}")
+                    raise
+            except requests.exceptions.RequestException as e:
+                logger.error(f"Failed to check job status: {e}")
+                raise
+
+        # Should not reach here, but just in case
+        raise Exception(f"Failed to check status after {max_retries} attempts")
 
     def wait_for_processing(self, job_id: str, max_wait: int = 600,
                            poll_interval: int = 10) -> Dict[str, Any]:
@@ -1478,7 +1532,8 @@ def run_publications(config_file: str = 'config.yaml'):
 
                         task_status = exporter.wait_for_task(
                             task_key=task_key,
-                            max_wait_seconds=max_wait,
+                            task_type="publish",
+                            max_wait=max_wait,
                             poll_interval=poll_interval
                         )
 
@@ -1497,6 +1552,10 @@ def run_publications(config_file: str = 'config.yaml'):
     projects = ConfigLoader.build_projects_from_config(config, exporter)
 
     logger.info(f"Loaded {len(projects)} project(s)")
+
+    # Get max_wait and poll_interval from settings
+    max_wait = settings.get('max_export_wait', 600)
+    poll_interval = settings.get('poll_interval', 10)
 
     # Process each project's publications (publish and export_pdf actions only)
     total_publications = sum(len(p.publications) for p in projects)
@@ -1523,14 +1582,18 @@ def run_publications(config_file: str = 'config.yaml'):
                         task_info = publication.publish(
                             update_mode=action_config.get('update_mode', 'Partial'),
                             visibility=action_config.get('visibility', 'Restricted'),
-                            output_tags=action_config.get('output_tags')
+                            output_tags=action_config.get('output_tags'),
+                            max_wait=max_wait,
+                            poll_interval=poll_interval
                         )
                         logger.info(f"  ✓ Publish: SUCCESS (task_key: {task_info.get('taskKey')})")
 
                     elif action_type == 'export_pdf':
                         logger.info(f"Action: Export PDF {publication.title}")
                         task_status = publication.export_to_pdf(
-                            export_preset_name=action_config.get('export_preset_name', 'Default')
+                            export_preset_name=action_config.get('export_preset_name', 'Default'),
+                            max_wait=max_wait,
+                            poll_interval=poll_interval
                         )
                         logger.info(f"  ✓ Export PDF: SUCCESS")
 
@@ -1712,6 +1775,10 @@ def run_backup(config_file: str = 'config.yaml'):
 
     logger.info(f"Loaded {len(projects)} project(s)")
 
+    # Get max_wait and poll_interval from settings
+    max_wait = settings.get('max_export_wait', 600)
+    poll_interval = settings.get('poll_interval', 10)
+
     # Get project configurations to check backup settings
     projects_config = config.get('projects', [])
 
@@ -1725,7 +1792,11 @@ def run_backup(config_file: str = 'config.yaml'):
 
         try:
             # Create and download backup
-            backup_path = project.backup_project(download_dir=download_dir)
+            backup_path = project.backup_project(
+                download_dir=download_dir,
+                max_wait=max_wait,
+                poll_interval=poll_interval
+            )
 
             # Get S3 folder name from config (default to project_id)
             s3_folder = backup_config.get('s3_folder', project.project_id)
