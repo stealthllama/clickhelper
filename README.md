@@ -71,8 +71,7 @@ settings:
   backup_dir: "./backups"
   wait_for_export: true
   wait_for_processing: true
-  max_export_wait: 600  # seconds
-  max_processing_wait: 600  # seconds
+  max_wait: 600  # seconds - maximum wait time for all task status calls
   poll_interval: 10  # seconds
 
 # Projects (each top-level key is a ClickHelp project ID)

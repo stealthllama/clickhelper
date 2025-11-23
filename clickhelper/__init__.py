@@ -1527,7 +1527,7 @@ def run_publications(config_file: str = 'config.yaml'):
                     task_key = task_info.get('taskKey')
                     if task_key:
                         logger.info(f"Waiting for publication creation to complete (task: {task_key})...")
-                        max_wait = settings.get('max_export_wait', 600)
+                        max_wait = settings.get('max_wait', 600)
                         poll_interval = settings.get('poll_interval', 10)
 
                         task_status = exporter.wait_for_task(
@@ -1554,7 +1554,7 @@ def run_publications(config_file: str = 'config.yaml'):
     logger.info(f"Loaded {len(projects)} project(s)")
 
     # Get max_wait and poll_interval from settings
-    max_wait = settings.get('max_export_wait', 600)
+    max_wait = settings.get('max_wait', 600)
     poll_interval = settings.get('poll_interval', 10)
 
     # Process each project's publications (publish and export_pdf actions only)
@@ -1776,7 +1776,7 @@ def run_backup(config_file: str = 'config.yaml'):
     logger.info(f"Loaded {len(projects)} project(s)")
 
     # Get max_wait and poll_interval from settings
-    max_wait = settings.get('max_export_wait', 600)
+    max_wait = settings.get('max_wait', 600)
     poll_interval = settings.get('poll_interval', 10)
 
     # Get project configurations to check backup settings
