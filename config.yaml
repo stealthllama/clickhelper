@@ -66,7 +66,7 @@ release-notes:
       - Platform_3.0.2
       - Platform_3.0.3
       - Platform_3.0.4
-      # - Platform_3.0.5
+      - Platform_3.0.5
       # - Platform_3.1
   export-dragos-platform-release-notes:
     title: Dragos Platform Release Notes
@@ -80,7 +80,7 @@ release-notes:
       - Platform_3.0.2
       - Platform_3.0.3
       - Platform_3.0.4
-      # - Platform_3.0.5
+      - Platform_3.0.5
       # - Platform_3.1
 
 #
