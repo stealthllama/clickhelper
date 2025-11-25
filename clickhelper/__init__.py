@@ -53,6 +53,9 @@ class ClickHelpClient:
         self.auth = HTTPBasicAuth(username, api_key)
         self.session = requests.Session()
         self.session.auth = self.auth
+        self.session.headers.update({
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+        })
 
     # ============================================================================
     # PDF Export Methods
@@ -753,7 +756,9 @@ class ClickHelpPublication:
     def upload_to_tribble(self, tribble_uploader: 'TribbleUploader',
                          label: Optional[str] = None,
                          pdf_path: Optional[str] = None,
-                         wait_for_processing: bool = True) -> Dict[str, Any]:
+                         wait_for_processing: bool = True,
+                         max_wait: int = 600,
+                         poll_interval: int = 10) -> Dict[str, Any]:
         """
         Upload this publication's PDF to Tribble.
 
@@ -762,6 +767,8 @@ class ClickHelpPublication:
             label: Label for the document in Tribble (defaults to publication title)
             pdf_path: Path to PDF file (uses last exported PDF if not provided)
             wait_for_processing: Whether to wait for Tribble processing to complete
+            max_wait: Maximum time to wait in seconds (default: 10 minutes)
+            poll_interval: Time between status checks in seconds (default: 10)
 
         Returns:
             Upload result including job_id
@@ -790,7 +797,7 @@ class ClickHelpPublication:
             job_id = upload_result.get('response', {}).get('job_id')
             if job_id:
                 try:
-                    tribble_uploader.wait_for_processing(job_id)
+                    tribble_uploader.wait_for_processing(job_id, max_wait=max_wait, poll_interval=poll_interval)
                 except TimeoutError as e:
                     logger.warning(f"Processing timeout: {e}")
 
@@ -863,7 +870,9 @@ class ClickHelpPublication:
                     upload_result = self.upload_to_tribble(
                         tribble_uploader=tribble_uploader,
                         label=action_config.get('label'),
-                        wait_for_processing=wait_for_processing
+                        wait_for_processing=wait_for_processing,
+                        max_wait=max_wait,
+                        poll_interval=poll_interval
                     )
                     action_result['success'] = upload_result.get('success', False)
                     action_result['job_id'] = upload_result.get('response', {}).get('job_id')
@@ -919,7 +928,8 @@ class TribbleUploader:
             raise FileNotFoundError(f"PDF file not found: {file_path}")
 
         headers = {
-            "Authorization": f"Bearer {self.api_token}"
+            "Authorization": f"Bearer {self.api_token}",
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
         }
 
         data = {
@@ -993,7 +1003,8 @@ class TribbleUploader:
             Status response with current processing state
         """
         headers = {
-            "Authorization": f"Bearer {self.api_token}"
+            "Authorization": f"Bearer {self.api_token}",
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
         }
 
         params = {
@@ -1638,6 +1649,8 @@ def run_tribble_upload(config_file: str = 'config.yaml'):
     # Settings
     download_dir = settings.get('download_dir', './downloads')
     wait_for_processing = settings.get('wait_for_processing', True)
+    max_wait = settings.get('max_wait', 600)
+    poll_interval = settings.get('poll_interval', 10)
 
     # Initialize ClickHelp client
     exporter = ClickHelpClient(
@@ -1694,7 +1707,9 @@ def run_tribble_upload(config_file: str = 'config.yaml'):
                         upload_result = publication.upload_to_tribble(
                             tribble_uploader=uploader,
                             label=action_config.get('label'),
-                            wait_for_processing=wait_for_processing
+                            wait_for_processing=wait_for_processing,
+                            max_wait=max_wait,
+                            poll_interval=poll_interval
                         )
 
                         if upload_result.get('success'):
