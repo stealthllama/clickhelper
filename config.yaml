@@ -115,331 +115,331 @@ community-defense-program:
 # Deployment Guide
 #
 deployment-guide:
-  dragos-platform-deployment-guide:
-    title: Deployment Guide
+  # dragos-platform-deployment-guide:
+  #   title: Deployment Guide
+  #   update: Partial
+  #   visibility: Restricted
+  #   export: False
+  #   output_tags:
+  #     - OnlineDoc
+  #     - Platform_3.0
+  # dragos-platform-deployment-guide-export:
+  #   title: Dragos Platform Deployment Guide
+  #   update: Partial
+  #   visibility: Private
+  #   export: True
+  #   output_tags:
+  #     - PrintedDoc
+  #     - Platform_3.0
+  deployment-guide-3-0:
+    title: Deployment Guide 3.0
     update: Partial
     visibility: Restricted
     export: False
     output_tags:
       - OnlineDoc
       - Platform_3.0
-  dragos-platform-deployment-guide-export:
-    title: Dragos Platform Deployment Guide
+  export-deployment-guide-3-0:
+    title: Dragos Platform 3.0 Deployment Guide
     update: Partial
     visibility: Private
     export: True
     output_tags:
       - PrintedDoc
       - Platform_3.0
-  # deployment-guide-3-0:
-  #   title: Deployment Guide 3.0
-  #   update: Partial
-  #   visibility: Restricted
-  #   export: False
-  #   output_tags:
-  #     - OnlineDoc
-  #     - Platform_3.0
-  # export-deployment-guide-3-0:
-  #   title: Dragos Platform 3.0 Deployment Guide
-  #   update: Partial
-  #   visibility: Private
-  #   export: True
-  #   output_tags:
-  #     - PrintedDoc
-  #     - Platform_3.0
-  # deployment-guide-3-1:
-  #   title: Deployment Guide 3.1
-  #   update: Partial
-  #   visibility: Restricted
-  #   export: False
-  #   output_tags:
-  #     - OnlineDoc
-  #     - Platform_3.0
-  #     - Platform_3.1
-  # export-deployment-guide-3-1:
-  #   title: Dragos Platform 3.1 Deployment Guide
-  #   update: Partial
-  #   visibility: Private
-  #   export: True
-  #   output_tags:
-  #     - PrintedDoc
-  #     - Platform_3.0
-  #     - Platform_3.1
+  deployment-guide-3-1:
+    title: Deployment Guide 3.1
+    update: Partial
+    visibility: Restricted
+    export: False
+    output_tags:
+      - OnlineDoc
+      - Platform_3.0
+      - Platform_3.1
+  export-deployment-guide-3-1:
+    title: Dragos Platform 3.1 Deployment Guide
+    update: Partial
+    visibility: Private
+    export: True
+    output_tags:
+      - PrintedDoc
+      - Platform_3.0
+      - Platform_3.1
 
 #
 # Administrator Guide
 #
 admin-guide:
-  dragos-platform-administrator-guide:
-    title: Administrator Guide
+  # dragos-platform-administrator-guide:
+  #   title: Administrator Guide
+  #   update: Partial
+  #   visibility: Restricted
+  #   export: False
+  #   output_tags:
+  #     - OnlineDoc
+  #     - Platform_3.0
+  # dragos-platform-administrator-guide-export:
+  #   title: Dragos Platform Administrator Guide
+  #   update: Partial
+  #   visibility: Private
+  #   export: True
+  #   output_tags:
+  #     - PrintedDoc
+  #     - Platform_3.0
+  administrator-guide-3-0:
+    title: Administrator Guide 3.0
     update: Partial
     visibility: Restricted
     export: False
     output_tags:
       - OnlineDoc
       - Platform_3.0
-  dragos-platform-administrator-guide-export:
-    title: Dragos Platform Administrator Guide
+  export-administrator-guide-3-0:
+    title: Dragos Platform 3.0 Administrator Guide
     update: Partial
     visibility: Private
     export: True
     output_tags:
       - PrintedDoc
       - Platform_3.0
-  # administrator-guide-3-0:
-  #   title: Administrator Guide 3.0
-  #   update: Partial
-  #   visibility: Restricted
-  #   export: False
-  #   output_tags:
-  #     - OnlineDoc
-  #     - Platform_3.0
-  # export-administrator-guide-3-0:
-  #   title: Dragos Platform 3.0 Administrator Guide
-  #   update: Partial
-  #   visibility: Private
-  #   export: True
-  #   output_tags:
-  #     - PrintedDoc
-  #     - Platform_3.0
-  # administrator-guide-3-1:
-  #   title: Administrator Guide 3.1
-  #   update: Partial
-  #   visibility: Restricted
-  #   export: False
-  #   output_tags:
-  #     - OnlineDoc
-  #     - Platform_3.0
-  #     - Platform_3.1
-  # export-administrator-guide-3-1:
-  #   title: Dragos Platform 3.1 Administrator Guide
-  #   update: Partial
-  #   visibility: Private
-  #   export: True
-  #   output_tags:
-  #     - PrintedDoc
-  #     - Platform_3.0
-  #     - Platform_3.1
+  administrator-guide-3-1:
+    title: Administrator Guide 3.1
+    update: Partial
+    visibility: Restricted
+    export: False
+    output_tags:
+      - OnlineDoc
+      - Platform_3.0
+      - Platform_3.1
+  export-administrator-guide-3-1:
+    title: Dragos Platform 3.1 Administrator Guide
+    update: Partial
+    visibility: Private
+    export: True
+    output_tags:
+      - PrintedDoc
+      - Platform_3.0
+      - Platform_3.1
 
 #
 # User Guide
 #
 user-guide:
-  dragos-platform-user-guide:
-    title: User Guide
+  # dragos-platform-user-guide:
+  #   title: User Guide
+  #   update: Partial
+  #   visibility: Restricted
+  #   export: False
+  #   output_tags:
+  #     - OnlineDoc
+  #     - Platform_3.0
+  # dragos-platform-user-guide-export:
+  #   title: Dragos Platform User Guide
+  #   update: Partial
+  #   visibility: Private
+  #   export: True
+  #   output_tags:
+  #     - PrintedDoc
+  #     - Platform_3.0
+  user-guide-3-0:
+    title: User Guide 3.0
     update: Partial
     visibility: Restricted
     export: False
     output_tags:
       - OnlineDoc
       - Platform_3.0
-  dragos-platform-user-guide-export:
-    title: Dragos Platform User Guide
+  export-user-guide-3-0:
+    title: Dragos Platform 3.0 User Guide
     update: Partial
     visibility: Private
     export: True
     output_tags:
       - PrintedDoc
       - Platform_3.0
-  # user-guide-3-0:
-  #   title: User Guide 3.0
-  #   update: Partial
-  #   visibility: Restricted
-  #   export: False
-  #   output_tags:
-  #     - OnlineDoc
-  #     - Platform_3.0
-  # export-user-guide-3-0:
-  #   title: Dragos Platform 3.0 User Guide
-  #   update: Partial
-  #   visibility: Private
-  #   export: True
-  #   output_tags:
-  #     - PrintedDoc
-  #     - Platform_3.0
-  # user-guide-3-1:
-  #   title: User Guide 3.1
-  #   update: Partial
-  #   visibility: Restricted
-  #   export: False
-  #   output_tags:
-  #     - OnlineDoc
-  #     - Platform_3.0
-  #     - Platform_3.1
-  # export-user-guide-3-1:
-  #   title: Dragos Platform 3.1 User Guide
-  #   update: Partial
-  #   visibility: Private
-  #   export: True
-  #   output_tags:
-  #     - PrintedDoc
-  #     - Platform_3.0
-  #     - Platform_3.1
+  user-guide-3-1:
+    title: User Guide 3.1
+    update: Partial
+    visibility: Restricted
+    export: False
+    output_tags:
+      - OnlineDoc
+      - Platform_3.0
+      - Platform_3.1
+  export-user-guide-3-1:
+    title: Dragos Platform 3.1 User Guide
+    update: Partial
+    visibility: Private
+    export: True
+    output_tags:
+      - PrintedDoc
+      - Platform_3.0
+      - Platform_3.1
 
 #
 # Developer Guide
 #
 developer-guide:
-  dragos-platform-developer-guide:
-    title: Developer Guide
+  # dragos-platform-developer-guide:
+  #   title: Developer Guide
+  #   update: Partial
+  #   visibility: Restricted
+  #   export: False
+  #   output_tags:
+  #     - OnlineDoc
+  #     - Platform_3.0
+  # dragos-platform-developer-guide-export:
+  #   title: Dragos Platform Developer Guide
+  #   update: Partial
+  #   visibility: Private
+  #   export: True
+  #   output_tags:
+  #     - PrintedDoc
+  #     - Platform_3.0
+  developer-guide-3-0:
+    title: Developer Guide 3.0
     update: Partial
     visibility: Restricted
     export: False
     output_tags:
       - OnlineDoc
       - Platform_3.0
-  dragos-platform-developer-guide-export:
-    title: Dragos Platform Developer Guide
+  export-developer-guide-3-0:
+    title: Dragos Platform 3.0 Developer Guide
     update: Partial
     visibility: Private
     export: True
     output_tags:
       - PrintedDoc
       - Platform_3.0
-  # developer-guide-3-0:
-  #   title: Developer Guide 3.0
-  #   update: Partial
-  #   visibility: Restricted
-  #   export: False
-  #   output_tags:
-  #     - OnlineDoc
-  #     - Platform_3.0
-  # export-developer-guide-3-0:
-  #   title: Dragos Platform 3.0 Developer Guide
-  #   update: Partial
-  #   visibility: Private
-  #   export: True
-  #   output_tags:
-  #     - PrintedDoc
-  #     - Platform_3.0
-  # developer-guide-3-1:
-  #   title: Developer Guide 3.1
-  #   update: Partial
-  #   visibility: Restricted
-  #   export: False
-  #   output_tags:
-  #     - OnlineDoc
-  #     - Platform_3.0
-  #     - Platform_3.1
-  # export-developer-guide-3-1:
-  #   title: Dragos Platform 3.1 Developer Guide
-  #   update: Partial
-  #   visibility: Private
-  #   export: True
-  #   output_tags:
-  #     - PrintedDoc
-  #     - Platform_3.0
-  #     - Platform_3.1
+  developer-guide-3-1:
+    title: Developer Guide 3.1
+    update: Partial
+    visibility: Restricted
+    export: False
+    output_tags:
+      - OnlineDoc
+      - Platform_3.0
+      - Platform_3.1
+  export-developer-guide-3-1:
+    title: Dragos Platform 3.1 Developer Guide
+    update: Partial
+    visibility: Private
+    export: True
+    output_tags:
+      - PrintedDoc
+      - Platform_3.0
+      - Platform_3.1
 
 #
 # Integration Guide
 #
 integration-guide:
-  dragos-platform-integration-guide:
-    title: Integration Guide
+  # dragos-platform-integration-guide:
+  #   title: Integration Guide
+  #   update: Partial
+  #   visibility: Restricted
+  #   export: False
+  #   output_tags:
+  #     - OnlineDoc
+  #     - Platform_3.0
+  # dragos-platform-integration-guide-export:
+  #   title: Dragos Platform Integration Guide
+  #   update: Partial
+  #   visibility: Private
+  #   export: True
+  #   output_tags:
+  #     - PrintedDoc
+  #     - Platform_3.0
+  integration-guide-3-0:
+    title: Integration Guide 3.0
     update: Partial
     visibility: Restricted
     export: False
     output_tags:
       - OnlineDoc
       - Platform_3.0
-  dragos-platform-integration-guide-export:
-    title: Dragos Platform Integration Guide
+  export-integration-guide-3-0:
+    title: Dragos Platform 3.0 Integration Guide
     update: Partial
     visibility: Private
     export: True
     output_tags:
       - PrintedDoc
       - Platform_3.0
-  # integration-guide-3-0:
-  #   title: Integration Guide 3.0
-  #   update: Partial
-  #   visibility: Restricted
-  #   export: False
-  #   output_tags:
-  #     - OnlineDoc
-  #     - Platform_3.0
-  # export-integration-guide-3-0:
-  #   title: Dragos Platform 3.0 Integration Guide
-  #   update: Partial
-  #   visibility: Private
-  #   export: True
-  #   output_tags:
-  #     - PrintedDoc
-  #     - Platform_3.0
-  # integration-guide-3-1:
-  #   title: Integration Guide 3.1
-  #   update: Partial
-  #   visibility: Restricted
-  #   export: False
-  #   output_tags:
-  #     - OnlineDoc
-  #     - Platform_3.0
-  #     - Platform_3.1
-  # export-integration-guide-3-1:
-  #   title: Dragos Platform 3.1 Integration Guide
-  #   update: Partial
-  #   visibility: Private
-  #   export: True
-  #   output_tags:
-  #     - PrintedDoc
-  #     - Platform_3.0
-  #     - Platform_3.1
+  integration-guide-3-1:
+    title: Integration Guide 3.1
+    update: Partial
+    visibility: Restricted
+    export: False
+    output_tags:
+      - OnlineDoc
+      - Platform_3.0
+      - Platform_3.1
+  export-integration-guide-3-1:
+    title: Dragos Platform 3.1 Integration Guide
+    update: Partial
+    visibility: Private
+    export: True
+    output_tags:
+      - PrintedDoc
+      - Platform_3.0
+      - Platform_3.1
 
 #
 # Support Guide
 #
 support-guide:
-  dragos-platform-support-guide:
-    title: Support Guide
+  # dragos-platform-support-guide:
+  #   title: Support Guide
+  #   update: Partial
+  #   visibility: Restricted
+  #   export: False
+  #   output_tags:
+  #     - OnlineDoc
+  #     - Platform_3.0
+  # dragos-platform-support-guide-export:
+  #   title: Dragos Platform Support Guide
+  #   update: Partial
+  #   visibility: Private
+  #   export: True
+  #   output_tags:
+  #     - PrintedDoc
+  #     - Platform_3.0
+  support-guide-3-0:
+    title: Support Guide 3.0
     update: Partial
     visibility: Restricted
     export: False
     output_tags:
       - OnlineDoc
       - Platform_3.0
-  dragos-platform-support-guide-export:
-    title: Dragos Platform Support Guide
+  export-support-guide-3-0:
+    title: Dragos Platform 3.0 Support Guide
     update: Partial
     visibility: Private
     export: True
     output_tags:
       - PrintedDoc
       - Platform_3.0
-  # support-guide-3-0:
-  #   title: Support Guide 3.0
-  #   update: Partial
-  #   visibility: Restricted
-  #   export: False
-  #   output_tags:
-  #     - OnlineDoc
-  #     - Platform_3.0
-  # export-support-guide-3-0:
-  #   title: Dragos Platform 3.0 Support Guide
-  #   update: Partial
-  #   visibility: Private
-  #   export: True
-  #   output_tags:
-  #     - PrintedDoc
-  #     - Platform_3.0
-  # support-guide-3-1:
-  #   title: Support Guide 3.1
-  #   update: Partial
-  #   visibility: Restricted
-  #   export: False
-  #   output_tags:
-  #     - OnlineDoc
-  #     - Platform_3.0
-  #     - Platform_3.1
-  # export-support-guide-3-1:
-  #   title: Dragos Platform 3.1 Support Guide
-  #   update: Partial
-  #   visibility: Private
-  #   export: True
-  #   output_tags:
-  #     - PrintedDoc
-  #     - Platform_3.0
-  #     - Platform_3.1
+  support-guide-3-1:
+    title: Support Guide 3.1
+    update: Partial
+    visibility: Restricted
+    export: False
+    output_tags:
+      - OnlineDoc
+      - Platform_3.0
+      - Platform_3.1
+  export-support-guide-3-1:
+    title: Dragos Platform 3.1 Support Guide
+    update: Partial
+    visibility: Private
+    export: True
+    output_tags:
+      - PrintedDoc
+      - Platform_3.0
+      - Platform_3.1
 
 #
 # NERC CIP Compliance Guide
