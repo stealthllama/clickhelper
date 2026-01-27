@@ -67,6 +67,7 @@ release-notes:
       - Platform_3.0.3
       - Platform_3.0.4
       - Platform_3.0.5
+      - Platform_3.0.6
       # - Platform_3.1
   export-dragos-platform-release-notes:
     title: Dragos Platform Release Notes
@@ -81,6 +82,7 @@ release-notes:
       - Platform_3.0.3
       - Platform_3.0.4
       - Platform_3.0.5
+      - Platform_3.0.6
       # - Platform_3.1
 
 #
@@ -132,30 +134,14 @@ community-defense-program:
 #       - PrintedDoc
 #       - Platform_3.0
 
-#
+###
 # Versioned Publications - The publication ordering affects the order in which they are displayed in the reader drop-down menu.
-#
+###
 
 #
 # Deployment Guide
 #
 deployment-guide:
-  # dragos-platform-deployment-guide:
-  #   title: Deployment Guide
-  #   update: Partial
-  #   visibility: Restricted
-  #   export: False
-  #   output_tags:
-  #     - OnlineDoc
-  #     - Platform_3.0
-  # dragos-platform-deployment-guide-export:
-  #   title: Dragos Platform Deployment Guide
-  #   update: Partial
-  #   visibility: Private
-  #   export: True
-  #   output_tags:
-  #     - PrintedDoc
-  #     - Platform_3.0
   deployment-guide-3-1:
     title: Deployment Guide 3.1
     update: Partial
@@ -163,7 +149,6 @@ deployment-guide:
     export: False
     output_tags:
       - OnlineDoc
-      - Exclusively_3.1
       - Platform_3.0
       - Platform_3.1  
   export-deployment-guide-3-1:
@@ -173,7 +158,6 @@ deployment-guide:
     export: True
     output_tags:
       - PrintedDoc
-      - Exclusively_3.1
       - Platform_3.0
       - Platform_3.1
   deployment-guide-3-0:
@@ -183,7 +167,6 @@ deployment-guide:
     export: False
     output_tags:
       - OnlineDoc
-      - Exclusively_3.0
       - Platform_3.0
   export-deployment-guide-3-0:
     title: Dragos Platform 3.0 Deployment Guide
@@ -192,29 +175,12 @@ deployment-guide:
     export: True
     output_tags:
       - PrintedDoc
-      - Exclusively_3.0
       - Platform_3.0
 
 #
 # Administrator Guide
 #
 admin-guide:
-  # dragos-platform-administrator-guide:
-  #   title: Administrator Guide
-  #   update: Partial
-  #   visibility: Restricted
-  #   export: False
-  #   output_tags:
-  #     - OnlineDoc
-  #     - Platform_3.0
-  # dragos-platform-administrator-guide-export:
-  #   title: Dragos Platform Administrator Guide
-  #   update: Partial
-  #   visibility: Private
-  #   export: True
-  #   output_tags:
-  #     - PrintedDoc
-  #     - Platform_3.0
   administrator-guide-3-1:
     title: Administrator Guide 3.1
     update: Partial
@@ -222,7 +188,6 @@ admin-guide:
     export: False
     output_tags:
       - OnlineDoc
-      - Exclusively_3.1
       - Platform_3.0
       - Platform_3.1
   export-administrator-guide-3-1:
@@ -232,7 +197,6 @@ admin-guide:
     export: True
     output_tags:
       - PrintedDoc
-      - Exclusively_3.1
       - Platform_3.0
       - Platform_3.1
   administrator-guide-3-0:
@@ -242,7 +206,6 @@ admin-guide:
     export: False
     output_tags:
       - OnlineDoc
-      - Exclusively_3.0
       - Platform_3.0
   export-administrator-guide-3-0:
     title: Dragos Platform 3.0 Administrator Guide
@@ -251,29 +214,12 @@ admin-guide:
     export: True
     output_tags:
       - PrintedDoc
-      - Exclusively_3.0
       - Platform_3.0
 
 #
 # User Guide
 #
 user-guide:
-  # dragos-platform-user-guide:
-  #   title: User Guide
-  #   update: Partial
-  #   visibility: Restricted
-  #   export: False
-  #   output_tags:
-  #     - OnlineDoc
-  #     - Platform_3.0
-  # dragos-platform-user-guide-export:
-  #   title: Dragos Platform User Guide
-  #   update: Partial
-  #   visibility: Private
-  #   export: True
-  #   output_tags:
-  #     - PrintedDoc
-  #     - Platform_3.0
   user-guide-3-1:
     title: User Guide 3.1
     update: Partial
@@ -281,7 +227,6 @@ user-guide:
     export: False
     output_tags:
       - OnlineDoc
-      - Exclusively_3.1
       - Platform_3.0
       - Platform_3.1
   export-user-guide-3-1:
@@ -291,7 +236,6 @@ user-guide:
     export: True
     output_tags:
       - PrintedDoc
-      - Exclusively_3.1
       - Platform_3.0
       - Platform_3.1 
   user-guide-3-0:
@@ -301,7 +245,6 @@ user-guide:
     export: False
     output_tags:
       - OnlineDoc
-      - Exclusively_3.0
       - Platform_3.0
   export-user-guide-3-0:
     title: Dragos Platform 3.0 User Guide
@@ -310,29 +253,12 @@ user-guide:
     export: True
     output_tags:
       - PrintedDoc
-      - Exclusively_3.0
       - Platform_3.0
 
 #
 # Developer Guide
 #
 developer-guide:
-  # dragos-platform-developer-guide:
-  #   title: Developer Guide
-  #   update: Partial
-  #   visibility: Restricted
-  #   export: False
-  #   output_tags:
-  #     - OnlineDoc
-  #     - Platform_3.0
-  # dragos-platform-developer-guide-export:
-  #   title: Dragos Platform Developer Guide
-  #   update: Partial
-  #   visibility: Private
-  #   export: True
-  #   output_tags:
-  #     - PrintedDoc
-  #     - Platform_3.0
   developer-guide-3-1:
     title: Developer Guide 3.1
     update: Partial
@@ -340,7 +266,6 @@ developer-guide:
     export: False
     output_tags:
       - OnlineDoc
-      - Exclusively_3.1
       - Platform_3.0
       - Platform_3.1
   export-developer-guide-3-1:
@@ -350,7 +275,6 @@ developer-guide:
     export: True
     output_tags:
       - PrintedDoc
-      - Exclusively_3.1
       - Platform_3.0
       - Platform_3.1  
   developer-guide-3-0:
@@ -360,7 +284,6 @@ developer-guide:
     export: False
     output_tags:
       - OnlineDoc
-      - Exclusively_3.0
       - Platform_3.0
   export-developer-guide-3-0:
     title: Dragos Platform 3.0 Developer Guide
@@ -369,29 +292,12 @@ developer-guide:
     export: True
     output_tags:
       - PrintedDoc
-      - Exclusively_3.0
       - Platform_3.0
 
 #
 # Integration Guide
 #
 integration-guide:
-  # dragos-platform-integration-guide:
-  #   title: Integration Guide
-  #   update: Partial
-  #   visibility: Restricted
-  #   export: False
-  #   output_tags:
-  #     - OnlineDoc
-  #     - Platform_3.0
-  # dragos-platform-integration-guide-export:
-  #   title: Dragos Platform Integration Guide
-  #   update: Partial
-  #   visibility: Private
-  #   export: True
-  #   output_tags:
-  #     - PrintedDoc
-  #     - Platform_3.0
   integration-guide-3-1:
     title: Integration Guide 3.1
     update: Partial
@@ -399,7 +305,6 @@ integration-guide:
     export: False
     output_tags:
       - OnlineDoc
-      - Exclusively_3.1
       - Platform_3.0
       - Platform_3.1
   export-integration-guide-3-1:
@@ -409,7 +314,6 @@ integration-guide:
     export: True
     output_tags:
       - PrintedDoc
-      - Exclusively_3.1
       - Platform_3.0
       - Platform_3.1
   integration-guide-3-0:
@@ -419,7 +323,6 @@ integration-guide:
     export: False
     output_tags:
       - OnlineDoc
-      - Exclusively_3.0
       - Platform_3.0
   export-integration-guide-3-0:
     title: Dragos Platform 3.0 Integration Guide
@@ -428,7 +331,6 @@ integration-guide:
     export: True
     output_tags:
       - PrintedDoc
-      - Exclusively_3.0
       - Platform_3.0
 
 
@@ -436,22 +338,6 @@ integration-guide:
 # Support Guide
 #
 support-guide:
-  # dragos-platform-support-guide:
-  #   title: Support Guide
-  #   update: Partial
-  #   visibility: Restricted
-  #   export: False
-  #   output_tags:
-  #     - OnlineDoc
-  #     - Platform_3.0
-  # dragos-platform-support-guide-export:
-  #   title: Dragos Platform Support Guide
-  #   update: Partial
-  #   visibility: Private
-  #   export: True
-  #   output_tags:
-  #     - PrintedDoc
-  #     - Platform_3.0
   support-guide-3-1:
     title: Support Guide 3.1
     update: Partial
@@ -459,7 +345,6 @@ support-guide:
     export: False
     output_tags:
       - OnlineDoc
-      - Exclusively_3.1
       - Platform_3.0
       - Platform_3.1
   export-support-guide-3-1:
@@ -469,7 +354,6 @@ support-guide:
     export: True
     output_tags:
       - PrintedDoc
-      - Exclusively_3.1
       - Platform_3.0
       - Platform_3.1
   support-guide-3-0:
@@ -479,7 +363,6 @@ support-guide:
     export: False
     output_tags:
       - OnlineDoc
-      - Exclusively_3.0
       - Platform_3.0
   export-support-guide-3-0:
     title: Dragos Platform 3.0 Support Guide
@@ -488,6 +371,5 @@ support-guide:
     export: True
     output_tags:
       - PrintedDoc
-      - Exclusively_3.0
       - Platform_3.0
 
