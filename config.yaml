@@ -138,7 +138,7 @@ community-defense-program:
 # Deployment Guide
 #
 deployment-guide:
-    deployment-guide-3-2:
+  deployment-guide-3-2:
     title: Deployment Guide 3.2
     update: Partial
     visibility: Restricted
