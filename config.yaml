@@ -63,6 +63,10 @@ release-notes:
       - OnlineDoc
       - Platform_3.0
       - Platform_3.1
+      - Platform_3.1.1
+      - Platform_3.1.2
+      - Platform_3.1.3
+      - Platform_3.1.4
       # - Platform_3.2
   export-dragos-platform-release-notes:
     title: Dragos Platform Release Notes
@@ -73,6 +77,10 @@ release-notes:
       - PrintedDoc
       - Platform_3.0
       - Platform_3.1
+      - Platform_3.1.1
+      - Platform_3.1.2
+      - Platform_3.1.3
+      - Platform_3.1.4
       # - Platform_3.2
 
 #
