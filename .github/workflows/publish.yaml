@@ -2,8 +2,8 @@ name: ClickHelper Workflows
 
 on:
   # Run on schedule (daily at 4 AM UTC)
-  schedule:
-    - cron: '0 4 * * *'
+  # schedule:
+  #   - cron: '0 4 * * *'
 
   # Allow manual trigger with workflow selection
   workflow_dispatch:
